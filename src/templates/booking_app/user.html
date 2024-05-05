@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} user {% endblock %}
+
+{% block content %}
+
+    <h2> All users </h2>
+
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in users %}
+    <tr>
+      <th scope="row">{{user.user_id}}</th>
+      <td>{{user.name}}</td>
+      <td>{{user.age}}</td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+{% endblock %}
