@@ -1,0 +1,117 @@
+#Task 1
+
+person = Person.objects.create(first_name="Poul",last_name="Yoker",age=30,sex="m")
+    Person.objects.create(first_name="Bob",last_name="Dilan",age=33,sex="m")
+    Person.objects.create(first_name="Bob",last_name="Marley",age=45,sex="m")
+    Person.objects.create(first_name="James",last_name="Welkham",age=50,sex="m")
+    Person.objects.create(first_name="Max",last_name="Adams",age=25,sex="m")
+    Person.objects.create(first_name="Jack",last_name="Harley",age=47,sex="m")
+    Person.objects.create(first_name="Lui",last_name="Haris",age=34,sex="m")
+    Person.objects.create(first_name="Ann",last_name="Bont",age=31,sex="f")з
+    Person.objects.create(first_name="Suzan",last_name="Franko",age=22,sex="f")
+    Person.objects.create(first_name="Nick",last_name="Poter",age=33,sex="m")
+
+hotels = Hotels.objects.create(name="Hotel MalinovoeVarenie",star=4,address="Drozdi, 1",city="Minsk",phone="+375(29)1111111")
+    Hotels.objects.create(name="Polish Bober",star=5,address="str Big Bober, 777",city="Warsaw",phone="+123456")
+
+    Hotels.objects.create(name="Kimersen",star=2,address="str Kimersen, 1",city="Pyongyang city",phone="+234567")
+    Hotels.objects.create(name="by Hilton",star=5,address="New str, 2",city="New York",phone="+334567")
+
+    Hotels.objects.create(name="Cinacika hotel",star=3,address="Cool str, 3",city="China",phone="+434567")
+    Hotels.objects.create(name="Legaliz hotel",star=4,address="Super str, 4",city="Canada",phone="+534567")
+
+    Hotels.objects.create(name="Gringo hotel",star=3,address="Not dead str, 5",city="Mexico",phone="+634567")
+    Hotels.objects.create(name="NotEat hotel",star=1,address="Oh my Got str, 6",city="India",phone="+734567")
+
+    Hotels.objects.create(name="DontUnderstand hotel",star=3,address="Wtf str, 7",city="Thailand",phone="+834567")
+    Hotels.objects.create(name="Konishua hotel",star=5,address="Some str, 8",city="Japan",phone="+934567")
+
+#Task 2
+
+hotels = Hotels.objects.order_by()[:10]
+for hotel in hotels:
+    ...:     print(f"Отель: {hotel.name}, Звёзды: {hotel.star}, Город: {hotel.city}")
+
+#Task 3
+
+person = Person.objects.order_by()[:10]
+for persons in person:
+    print(f"Фамилия: {persons.last_name}, Возраст: {persons.age}")
+
+#Task 4
+
+person = Person.objects.all()
+person
+
+#Task 5
+
+hotels = Hotels.objects.filter(star__gt=3)
+
+for hotel in hotels:
+    print(f"Отель: {hotel.name}, Звёзды: {hotel.star}, Город: {hotel.city}")
+
+#Task 6
+
+person = Person.objects.filter(age__gt=40, first_name__startswith='P')
+
+for persons in person:
+    print(f"Имя: {persons.first_name}, Фамилия: {persons.last_name}, Возраст: {persons.age}")
+
+#Task 7
+
+person = Person.objects.filter(first_name='Nick') | Person.objects.filter(first_name='Suzan')
+
+for persons in person:
+    print(f"Имя: {persons.first_name}, Фамилия: {persons.last_name}")
+
+#Task 8
+
+person = Person.objects.order_by('age')[:5]
+
+for persons in person:
+    print(f"Имя: {persons.first_name}, Фамилия: {persons.last_name}, Возраст: {persons.age}")
+
+#Task 9
+
+girls = Person.objects.filter(sex='f', age__gte=18, age__lte=30)
+
+for girl in girls:
+    print(f"Имя: {girl.first_name}, Фамилия: {girl.last_name}, Возраст: {girl.age}")
+
+
+
+                Lessons 24
+
+
+# Task 6
+Вывести всех пользователей старше 30 которые были в отеле  B&B
+
+hotels = Hotel.objects.all()
+hotel = Hotel.objects.get(name="B&B")
+
+person = Person.objects.filter(age__gt=30)
+
+# Task 7
+Вывести первых 5 девушек у которых больше 3 хобби
+
+person = Person.objects.filter(sex='f')
+
+women = person[:5]
+
+
+girls_with_hobbies_count = person.annotate(num_hobbies=Count('hobbies'))
+
+# Фильтруем только те девушки, у которых больше 3 хобби
+women = person.filter(experience__gt=3)
+
+# Выводим первые 5 девушек
+first_5_girls_with_more_than_3_hobbies = girls_with_more_than_3_hobbies[:5]
+
+
+# Task 8
+Вывести все заведения с максимальным рейтингом в 5 звёзд
+
+person = Person.objects.filter(age__gt=30, hotel__name="B&B")
+
+for persons in person:
+    print(f"Имя: {persons.first_name}, Фамилия: {persons.last_name}, Возраст: {persons.age}")
