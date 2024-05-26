@@ -1,0 +1,22 @@
+Task 5
+5)	Вывести всех пользователей старше 30 которые любят спорт!
+
+result = Person.objects.filter(age__gt=30).filter(hobbies__name='sport')
+result
+len(result)
+
+for user in result:
+    print(f"Имя: {user.first_name}, Фамилия: {user.last_name}, Возраст: {user.age}, Пол: {user.sex}")
+
+
+Task 6
+6)	Вывести первых 5 пользователей у которых больше 3 хобби.
+
+hobbies = Person.objects.annotate(num_hobbies=Count('hobbies')).filter(num_hobbies__gt=3)
+first_five_users = hobbies[:5]
+first_five_users
+len(first_five_users)
+
+for user in first_five_users:
+    print(f"Имя: {user.first_name}, Фамилия: {user.last_name}, Возраст: {user.age}")
+
