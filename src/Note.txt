@@ -1,0 +1,45 @@
+# запуск всех тестов
+# python -m unittest booking_app/tests.py
+
+# запуск всех тестов с более читабельный
+# python -m unittest -v booking_app/tests.py
+
+# запуск отельного теста
+# python -m unittest -v booking_app.tests.название класса.название отъдельной функции
+
+
+# запуск 1 теста
+py manage.py test -k test_add_some_value_to_queue
+
+py manage.py test booking_app.tests -k test_add_some_value_to_queue
+
+# запуск тестов в тестовой базе (после ошибок)
+ py manage.py test booking_app.tests
+
+# Не создается новая база, а берется из кеша
+py manage.py test booking_app.tests --keepdb
+
+# Создание модели
+from django.test import Client
+
+client = Client()
+
+response = client.get("/booking/persons")
+
+dir(response)
+
+#
+ py manage.py test booking_app.tests.views_test -k test_user_list_view
+
+
+#Запуск селери
+ celery -A config worker -l info --pool=solo
+
+    # сразу запускаем flower, после celery и
+        celery -A config flower --address=127.0.0.6 --port=5566
+
+            # поднимаем сервер
+            py manage.py runserver
+
+                #
+                 celery -A config beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
